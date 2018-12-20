@@ -10,26 +10,39 @@ public class Spielerliste
     this.spielerliste = new Spieler[_ANZAHLSPIELER];
   }
 
+  public Spieler getNaechsterSpieler() {
+    if (spielerAmZug < _ANZAHLSPIELER - 1) {
+      if (spielerliste[spielerAmZug+1] != null) {
+        return spielerliste[spielerAmZug+1];
+      } else {
+        for (int i = spielerAmZug; i < _ANZAHLSPIELER; i++) {
+        }
+      }
+    } else {
+      return getAktuellerSpieler();
+    }
+  }
+
   public void spielerHinzufuegen(Spieler x)
   {
     spielerliste[index] = x;
     index++;
   }
-  
-  public int anzahlSpieler(){
+
+  public int anzahlSpieler() {
     int anzahl = 0;  
-    for(int i = 0; i < _ANZAHLSPIELER;i++){
-      if(spielerliste[i] != null){
+    for (int i = 0; i < _ANZAHLSPIELER; i++) {
+      if (spielerliste[i] != null) {
         anzahl++;
       }
-      }
+    }
     return anzahl;
   }
-  
+
   public void spielerLoeschen(Spieler x)
   {
-    for(int i = 0; i < spielerliste.length;i++){
-      if(x.getName().equals(spielerliste[i].getName())){
+    for (int i = 0; i < spielerliste.length; i++) {
+      if (x.getName().equals(spielerliste[i].getName())) {
         spielerliste[i] = null;
       }
     }

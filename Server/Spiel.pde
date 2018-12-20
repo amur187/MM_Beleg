@@ -3,6 +3,7 @@ public class Spiel
   private int maxRunden = 3;
   private int runde = 0;
   private int anzahlSpieler = 3;
+  private int letzterMaler = 0;
   private double zeitProRunde = 60;
   private String wortDerRunde;
   private boolean starten = false;
@@ -12,61 +13,92 @@ public class Spiel
 
   public void spielStarten()
   {
-    starten = true;
-    spielerliste.setSpielerAmZug(0);
-    this.runde = 1;
-    spielerliste.getSpieler(0).setZugTrue();
-  }
-
-  public void naechsteRunde()
-  {
-    spielerliste.setSpielerAmZug(0);
-    runde++;
-    getWortDerRunde();
-  }
-
-  void spielerWechsel()
-  {
-    spielerliste.getAktuellerSpieler().setZugFalse();
-    spielerliste.naechsterSpieler();
-    spielerliste.getAktuellerSpieler().setZugTrue();
-    getWortDerRunde();
-  }
-
-  String getWortDerRunde()
-  {
-    this.wortDerRunde = wortliste.getRandomWord();
-    return this.wortDerRunde;
-  }
-
-  boolean zeitAbgelaufen()
-  {
-    if (zeitProRunde == 0)
-    {
-      return true;
-    }
-    return false;
-  }
-
-  void spielerFertig()
-  {
-    //wenn spieler erraten hat - kommt in platzierung rein
-  }
-
-  void spielBeenden()
-  {
-    if (runde == maxRunden)
-    {
+    if (genugSpieler()) {
     }
   }
 
-  int getRunde()
-  {
-    return runde;
+  private void rundeStarten() {
+  //  bestimmeMaler();
+    getWortDerRunde();
+    //5s Timer 
+
+    //Haupttimer starten (spiel läuft)
   }
 
-  //void getAktuellerSpielerAmZug()
-  //{
-  //  spielerliste.getAktuellerSpieler();
+  private void timer() {
+    //timer ablaufen lassen
+
+    //gui repaint
+    //maler werden rechte entzogen
+    //punkte werden summiert
+  }
+
+  //private Spieler bestimmeMaler() {
+  //  for (int i = letzterMaler; i < spielerliste.getSpielerliste().length;i++) {
+  //    if (spielerliste.getSpieler(i) != null) {
+  //      spielerliste.getSpieler(i).setZugTrue();
+  //      return spielerliste.getSpieler(i);
+  //    }
+  //  }
   //}
+
+  private boolean genugSpieler() {
+    if (spielerliste.anzahlSpieler() >1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+public void naechsteRunde()
+{
+  spielerliste.setSpielerAmZug(0);
+  runde++;
+  getWortDerRunde();
+}
+
+void spielerWechsel()
+{
+  spielerliste.getAktuellerSpieler().setZugFalse();
+  spielerliste.naechsterSpieler();
+  spielerliste.getAktuellerSpieler().setZugTrue();
+  getWortDerRunde();
+}
+
+String getWortDerRunde()
+{
+  this.wortDerRunde = wortliste.getRandomWord();
+  return this.wortDerRunde;
+}
+
+boolean zeitAbgelaufen()
+{
+  if (zeitProRunde == 0)
+  {
+    return true;
+  }
+  return false;
+}
+
+void spielerFertig()
+{
+  //wenn spieler erraten hat - kommt in platzierung rein
+}
+
+void spielBeenden()
+{
+  if (runde == maxRunden)
+  {
+  }
+}
+
+int getRunde()
+{
+  return runde;
+}
+
+//void getAktuellerSpielerAmZug()
+//{
+//  spielerliste.getAktuellerSpieler();
+//}
 }

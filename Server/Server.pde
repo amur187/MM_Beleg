@@ -21,10 +21,9 @@ void setup() {
   y=0;
   background(155);
   Spiel game = new Spiel();
-   while(spielerScoreboard.anzahlSpieler() > 1){
+  while (spielerScoreboard.anzahlSpieler() >= 0) {
     System.out.println("Spiel gestartet");
-  game.spielStarten();
-
+    game.spielStarten();
   }
 }
 void draw() {
@@ -58,7 +57,7 @@ void webSocketServerEvent(String msg) {
   } else if (msg.substring(0, 4).equals("chat")) {
     ws.sendMessage(msg);
   } else if (msg.substring(0, 4).equals("join")) {
-    Spieler s = new Spieler(msg.substring(4,msg.length()));
+    Spieler s = new Spieler(msg.substring(4, msg.length()));
     spielerScoreboard.spielerHinzufuegen(s);
     spielerBeigetreten++;
     spielerDatenSenden();

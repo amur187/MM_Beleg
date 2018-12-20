@@ -14,6 +14,8 @@ PShape bgChatNachrichten;
 PShape bgScoreBoard;
 PShape bgWerkzeugleiste;
 
+PShape canvas;
+
 boolean pinsel;
 boolean fuellen;
 
@@ -43,7 +45,9 @@ void setup() {
   farbleiste = new ButtonFill();
 
 
-
+  //Canvas
+  
+  canvas = createShape(RECT,15,55,1075,680);
 
   //Textnachrichten darstellen und Hintergrund vom Textfeld 
   nachrichten = cp5.addTextarea("Nachrichten").setPosition(width-chatBreite, 250).setSize(chatBreite, chatHoehe-50).scroll(2).setFont(createFont("Arial", 12));
@@ -93,6 +97,7 @@ public void fuellen() {
 void draw() {
   shape(bgChatNachrichten);
   shape(bgScoreBoard);
+  shape(canvas);
   message = "";
   message = cp5.get(Textfield.class, "Chateingabe").getText();
   zeichnen();
@@ -108,20 +113,18 @@ void lineData() {
 }
 
 void zeichnen() {
-  float linienFarbe = 20;
+  float linienFarbe = 10;
   float linienDicke = cp5.get("pinselGroesse").getValue();
 
 
-  stroke(linienFarbe);
+  stroke(currentColor);
   strokeWeight(linienDicke);
   if (mousePressed == true) {
-    
-    
     if (pinsel == true) {
       line(mouseX, mouseY, pmouseX, pmouseY);
    
     
-      wsc.sendMessage("draw"+ ":" + mouseX + ":" + mouseY + ":" + pmouseX + ":" +pmouseY + ":" + linienFarbe + ":" + linienDicke + ":");
+      wsc.sendMessage("draw"+ ":" + mouseX + ":" + mouseY + ":" + pmouseX + ":" +pmouseY + ":" + currentColor + ":" + linienDicke + ":");
     } else if (fuellen == true) {
       background(190);
     }
